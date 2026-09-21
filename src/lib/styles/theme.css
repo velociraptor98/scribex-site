@@ -1,0 +1,166 @@
+/* Tokens are the app's own (scribex/src/theme.css), so the page and the product
+ * read as one thing. Only the page-level layout below is new. */
+
+@import "./fonts.css";
+
+:root {
+  --ink: #171614;
+  --ink-raised: #1c1b19;
+  --ink-editor: #1a1917;
+  --ink-deep: #141312;
+  --ink-panel: #201f1d;
+
+  --paper: #f3f2f2;
+  --paper-ink: #201f1d;
+
+  --text: #ece7df;
+  --text-70: rgba(236, 231, 223, 0.7);
+  --text-55: rgba(236, 231, 223, 0.55);
+  --text-42: rgba(236, 231, 223, 0.42);
+  --text-38: rgba(236, 231, 223, 0.38);
+  --text-24: rgba(236, 231, 223, 0.24);
+
+  --rule: rgba(236, 231, 223, 0.12);
+  --rule-soft: rgba(236, 231, 223, 0.08);
+  --rule-strong: rgba(236, 231, 223, 0.2);
+
+  --accent: #c28d41;
+  --accent-300: #facb8d;
+  --accent-400: #e1ad66;
+  --accent-wash: rgba(194, 141, 65, 0.1);
+  --accent-wash-soft: rgba(194, 141, 65, 0.07);
+  --accent-edge: rgba(194, 141, 65, 0.4);
+
+  --mark: #d98168;
+
+  --font-heading: "Cormorant Garamond", Georgia, serif;
+  --font-body: "Lora", Georgia, serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --radius-sm: 3px;
+  --radius-md: 4px;
+  --shadow-lg: 0 24px 60px rgba(0, 0, 0, 0.6);
+
+  /* — page layout — */
+  --measure: 1180px;
+  --gutter: clamp(16px, 4vw, 40px);
+
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+
+html {
+  background: var(--ink);
+  scroll-behavior: smooth;
+  scroll-padding-top: 72px;
+}
+
+body {
+  margin: 0;
+  background: var(--ink);
+  color: var(--text);
+  font: 400 16px/1.7 var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+
+.app { display: contents; }
+
+a { color: inherit; }
+img, svg { display: block; max-width: 100%; }
+
+:focus { outline: none; }
+:focus-visible { outline: 1px solid var(--accent); outline-offset: 3px; }
+::selection { background: rgba(194, 141, 65, 0.3); }
+
+/* ── shared primitives, as in the app ───────────────────────────────────── */
+
+.rubric {
+  font: 400 11px var(--font-body);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-38);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font: 600 16px var(--font-heading);
+  padding: 10px 20px;
+  background: transparent;
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius-md);
+  color: var(--text-70);
+  cursor: pointer;
+  white-space: nowrap;
+  text-decoration: none;
+  transition: border-color 0.15s, color 0.15s, background 0.15s;
+}
+.btn:hover { border-color: var(--text-55); color: var(--text); }
+.btn-primary { border-color: var(--accent); color: var(--accent); }
+.btn-primary:hover { background: var(--accent-wash); border-color: var(--accent); color: var(--accent-300); }
+.btn-sm { font-size: 13.5px; padding: 6px 13px; }
+
+.key {
+  display: inline-block;
+  font: 400 12px var(--font-mono);
+  padding: 3px 8px;
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius-sm);
+  color: var(--text-55);
+  line-height: 1.4;
+}
+
+.plate {
+  background: var(--paper);
+  color: var(--paper-ink);
+  border: 7px solid #2d2b2b;
+  outline: 1px solid rgba(236, 231, 223, 0.14);
+}
+
+.hairline { height: 1px; background: var(--rule); border: 0; margin: 0; }
+.tnum { font-variant-numeric: tabular-nums; }
+
+/* ── page layout ────────────────────────────────────────────────────────── */
+
+.wrap {
+  width: 100%;
+  max-width: calc(var(--measure) + 2 * var(--gutter));
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+.section { padding: clamp(72px, 11vw, 128px) 0; }
+.section + .section { border-top: 1px solid var(--rule-soft); }
+
+.eyebrow { color: var(--accent); margin: 0 0 18px; }
+
+.h2 {
+  margin: 0;
+  font: 300 clamp(34px, 5vw, 52px)/1.08 var(--font-heading);
+  letter-spacing: -0.01em;
+  color: var(--text);
+}
+.h2 em { font-style: italic; color: var(--accent-400); }
+
+.lede {
+  margin: 20px 0 0;
+  max-width: 34em;
+  font-size: 17px;
+  color: var(--text-70);
+}
+
+.gilt-rule {
+  width: 120px;
+  height: 1px;
+  background: rgba(194, 141, 65, 0.45);
+  border: 0;
+  margin: 26px 0;
+}
