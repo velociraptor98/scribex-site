@@ -1,5 +1,5 @@
 <script lang="ts">
-  /** Two marks as the app writes them (wording from scribex/src/texlog.ts).
+  /** Two issues as the app writes them (wording from scribex/src/texlog.ts).
    *  Applying a fix edits the source excerpt, as it does in the editor. */
 
   interface Mark {
@@ -65,7 +65,7 @@
   </div>
 
   <aside class="marks">
-    <div class="rubric">Marks on this proof</div>
+    <div class="rubric">Issues in this build</div>
     {#each open as m (m.id)}
       <article class="mark">
         <span class="mark-line tnum">l. {m.line}</span>
@@ -80,7 +80,7 @@
       </article>
     {/each}
     <p class="clean">
-      {open.length ? "Everything else set cleanly." : "Everything set cleanly."}
+      {open.length ? "Everything else built cleanly." : "No issues — the document built cleanly."}
       {#if fixed.length}<button class="reset" onclick={() => (fixed = [])}>Reset</button>{/if}
     </p>
   </aside>

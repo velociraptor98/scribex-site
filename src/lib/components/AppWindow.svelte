@@ -36,7 +36,7 @@
   }
 </script>
 
-<figure class="window" aria-label="The ScribeX editor: contents, LaTeX source, and the typeset page side by side">
+<figure class="window" aria-label="The ScribeX editor: an outline, the LaTeX source and the PDF preview side by side">
   <div class="titlebar">
     <span class="lights" aria-hidden="true"><i></i><i></i><i></i></span>
     <span class="name">heat-flow.tex</span>
@@ -69,8 +69,8 @@
 
     <div class="recto">
       <div class="tabs">
-        <span class="tab is-on">Proof</span>
-        <span class="tab">Marks</span>
+        <span class="tab is-on">Preview</span>
+        <span class="tab">Issues</span>
         <span class="btn btn-sm export">Export PDF</span>
       </div>
 
@@ -95,7 +95,7 @@
 
       <div class="recto-foot tnum">
         <span>Page 1 of 2 · 130%</span>
-        <span>Set in 684 ms</span>
+        <span>Built in 684 ms</span>
       </div>
     </div>
   </div>
@@ -286,7 +286,7 @@
   @media (max-width: 980px) {
     .contents { display: none; }
   }
-  /* On a phone the page is the point: drop the source and keep the proof. */
+  /* On a phone the page is the point: drop the source and keep the preview. */
   @media (max-width: 680px) {
     .spread { height: 440px; }
     .source, .fold { display: none; }

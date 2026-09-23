@@ -8,27 +8,27 @@
   const FEATURES = [
     {
       title: "Live preview",
-      body: "The page rebuilds 600 ms after you stop typing, and keeps its scroll position while it does.",
+      body: "The PDF updates a moment after you stop typing.",
     },
     {
-      title: "The engine is built in",
-      body: "Tectonic is compiled into the app. There is no TeX Live to install and no server to sign in to.",
+      title: "Autosave",
+      body: "Your file is saved every 10 seconds. The title bar shows when it happens.",
     },
     {
-      title: "Your file is left alone",
-      body: "Preview typesets the editor buffer from memory. The document on disk changes only when you save.",
+      title: "Nothing else to install",
+      body: "The LaTeX engine is part of the app. You don't need TeX Live.",
     },
     {
-      title: "Contents in the margin",
-      body: "An outline built from your \\section commands. Click a heading to jump to it; sections, equations and citations are counted as you write.",
+      title: "Outline",
+      body: "Your sections are listed on the left. Click one to jump to it.",
     },
     {
-      title: "Export on your terms",
-      body: "Choose Letter, A4 or A5, add hyperlinked cross-references, and save the .tex beside the PDF. Your source is not rewritten.",
+      title: "Export",
+      body: "Save a PDF in Letter, A4 or A5, with the .tex file alongside if you want it.",
     },
     {
-      title: "Start from a template",
-      body: "Article, letter, thesis and Beamer slides, each a complete document that typesets on first open.",
+      title: "Templates",
+      body: "Start from an article, a letter, a thesis or Beamer slides.",
     },
   ];
 
@@ -37,7 +37,7 @@
     ["⌘S", "Save"],
     ["⇧⌘S", "Save as"],
     ["⌘E", "Export as PDF"],
-    ["⌘R", "Typeset now"],
+    ["⌘R", "Build now"],
     ["⌘O", "Open"],
     ["⌘N", "New document"],
     ["⌘B", "Bold"],
@@ -46,13 +46,13 @@
 </script>
 
 <svelte:head>
-  <title>ScribeX — a LaTeX editor for macOS</title>
+  <title>ScribeX — a LaTeX editor for Mac</title>
   <meta
     name="description"
-    content="ScribeX is a LaTeX editor for macOS that typesets as you write, with the Tectonic engine built in. No TeX Live install, no account, no server."
+    content="A LaTeX editor for Mac. See the PDF as you type. Works offline, with nothing else to install."
   />
-  <meta property="og:title" content="ScribeX — a LaTeX editor for macOS" />
-  <meta property="og:description" content="LaTeX source on the left, the typeset page on the right, rebuilt as you type." />
+  <meta property="og:title" content="ScribeX — a LaTeX editor for Mac" />
+  <meta property="og:description" content="Write LaTeX and see the PDF as you type." />
   <meta property="og:type" content="website" />
 </svelte:head>
 
@@ -63,6 +63,7 @@
     <a href="/" class="home" aria-label="ScribeX home"><Logo /></a>
     <nav class="links" aria-label="Sections">
       <a href="#features">Features</a>
+      <a href="#issues">Errors</a>
       <a href="#offline">Offline</a>
       <a href="#shortcuts">Shortcuts</a>
     </nav>
@@ -73,12 +74,12 @@
 <main id="main">
   <section class="hero">
     <div class="wrap">
-      <p class="rubric eyebrow">A LaTeX editor for macOS</p>
-      <h1>LaTeX on the left.<br />The typeset page on the <em>right</em>.</h1>
+      <p class="rubric eyebrow">A LaTeX editor for Mac</p>
+      <h1>Write LaTeX.<br />See the <em>PDF</em>.</h1>
       <hr class="gilt-rule" />
       <p class="lede">
-        ScribeX typesets your document on your Mac as you write it. There is no
-        TeX Live to install, no account and no server.
+        ScribeX shows your document next to its source and updates it as you
+        type. It works offline, and there's nothing else to install.
       </p>
       <div class="cta">
         <a class="btn btn-primary" href={DOWNLOAD}>Download for macOS</a>
@@ -95,7 +96,7 @@
   <section class="section" id="features">
     <div class="wrap">
       <p class="rubric eyebrow">Features</p>
-      <h2 class="h2">An editor, a typesetter<br />and a proof in one window</h2>
+      <h2 class="h2">Everything in one window</h2>
       <div class="features">
         {#each FEATURES as f}
           <article class="feature">
@@ -112,29 +113,28 @@
       <div class="split-head">
         <div>
           <p class="rubric eyebrow">⌘K</p>
-          <h2 class="h2">Describe it.<br />Get the <em>LaTeX</em>.</h2>
+          <h2 class="h2">Type what you <em>want</em></h2>
         </div>
         <p class="lede">
-          Type what you want in plain English and the palette writes the markup,
-          with the caret where you'll type next. Matching runs locally on your
-          Mac. This is the app's own matcher: try it.
+          Can't remember the syntax? Press ⌘K and ask for “a 3 by 4 table” or
+          “aligned equations”, and ScribeX writes the LaTeX for you. Try it here.
         </p>
       </div>
       <PaletteDemo />
     </div>
   </section>
 
-  <section class="section" id="marks">
+  <section class="section" id="issues">
     <div class="wrap">
       <div class="split-head">
         <div>
-          <p class="rubric eyebrow">Marks</p>
-          <h2 class="h2">Errors you can<br /><em>read</em></h2>
+          <p class="rubric eyebrow">Issues</p>
+          <h2 class="h2">Errors in plain <em>English</em></h2>
         </div>
         <p class="lede">
-          TeX's log is rewritten into a heading and a sentence, pinned to the
-          line that caused it. When the fix is unambiguous, it's one click away.
-          TeX's own wording stays underneath.
+          When something breaks, ScribeX tells you what went wrong and on which
+          line. Many problems have a one-click fix. Your preview stays put while
+          you work on it.
         </p>
       </div>
       <MarksDemo />
@@ -145,11 +145,10 @@
     <div class="wrap offline">
       <div>
         <p class="rubric eyebrow">Offline</p>
-        <h2 class="h2">Typesetting happens<br />on your <em>Mac</em></h2>
+        <h2 class="h2">Works <em>offline</em></h2>
         <p class="lede">
-          Packages and fonts are cached on your Mac the first time a document
-          needs them. After that, ScribeX works with the network off, and it
-          starts that way.
+          ScribeX builds your documents on your Mac. It needs the internet once,
+          to download LaTeX packages and fonts. After that it works offline.
         </p>
       </div>
 
@@ -157,32 +156,37 @@
         <li>
           <span class="step-n tnum">1</span>
           <div>
-            <h3>First run: fetch once</h3>
+            <h3>Download once</h3>
             <p>
-              A new install has no fonts or packages yet. Click
-              <strong>Prime full cache</strong> once to download the common set;
-              a basic document needs about 41 MB.
+              The first time you open ScribeX, click
+              <strong>Download now</strong>. It fetches about 45 MB and takes a
+              minute or two. Every template works offline after that.
             </p>
+            <div class="setup" aria-hidden="true">
+              <span class="setup-head">Downloading the LaTeX essentials</span>
+              <span class="setup-file"><code>amsmath.sty</code> · 212 of about 440 files</span>
+              <span class="setup-bar"><span class="setup-fill"></span></span>
+            </div>
           </div>
         </li>
         <li>
           <span class="step-n tnum">2</span>
           <div>
-            <h3>Then: offline by default</h3>
+            <h3>Offline by default</h3>
             <p>
-              The <span class="lamp"><span class="lamp-dot"></span>Offline</span>
-              lamp in the title bar shows the engine refusing network access.
-              Click it to allow fetching.
+              <span class="lamp"><span class="lamp-dot"></span>Offline</span>
+              in the title bar means ScribeX won't use the internet. Click it to
+              allow downloads.
             </p>
           </div>
         </li>
         <li>
           <span class="step-n tnum">3</span>
           <div>
-            <h3>Missing something? Say so</h3>
+            <h3>More packages when you need them</h3>
             <p>
-              If a document needs a package that isn't cached, a banner names it
-              and offers to fetch just that file.
+              If a document uses a package you don't have yet, ScribeX tells you
+              which one and can download it. The title bar shows it coming in.
             </p>
             <div class="banner">
               <span><code>tikz.sty</code> is not in the offline cache.</span>
@@ -197,7 +201,7 @@
   <section class="section" id="shortcuts">
     <div class="wrap">
       <p class="rubric eyebrow">Shortcuts</p>
-      <h2 class="h2">No toolbar. <em>⌘K</em> reaches everything.</h2>
+      <h2 class="h2">Keyboard <em>shortcuts</em></h2>
       <dl class="keys">
         {#each SHORTCUTS as [key, label]}
           <div class="key-row">
@@ -213,7 +217,10 @@
     <div class="wrap download-inner">
       <img src="/app-icon.svg" alt="" width="148" height="148" class="app-icon" />
       <h2 class="h2">Download ScribeX</h2>
-      <p class="lede">A native Mac app, about 25 MB to download.</p>
+      <p class="lede">
+        About 25 MB. The first time you open it, it downloads about 45 MB more
+        for LaTeX.
+      </p>
       <div class="cta">
         <a class="btn btn-primary" href={DOWNLOAD}>Download for macOS</a>
         <a class="btn" href="{REPO}#running">Build from source</a>
@@ -227,9 +234,9 @@
   <div class="wrap footer-inner">
     <Logo small />
     <p>
-      Typeset by <a href="https://tectonic-typesetting.github.io/">Tectonic</a>.
-      Edited in <a href="https://codemirror.net/">CodeMirror</a>, previewed with
-      <a href="https://mozilla.github.io/pdf.js/">PDF.js</a>, built on
+      Made with <a href="https://tectonic-typesetting.github.io/">Tectonic</a>,
+      <a href="https://codemirror.net/">CodeMirror</a>,
+      <a href="https://mozilla.github.io/pdf.js/">PDF.js</a> and
       <a href="https://tauri.app/">Tauri</a>.
     </p>
     <p class="copy">© 2026 Kunal Singh · <a href={REPO}>GitHub</a></p>
@@ -367,6 +374,22 @@
   }
   .banner code { font-family: var(--font-mono); color: var(--accent-300); }
   .banner .btn { cursor: default; }
+  .setup {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-top: 16px;
+    padding: 12px 16px 14px;
+    background: var(--accent-wash);
+    border: 1px solid var(--accent-edge);
+    border-radius: var(--radius-md);
+    font-size: 13.5px;
+  }
+  .setup-head { color: var(--accent-300); }
+  .setup-file { color: var(--text-55); }
+  .setup-file code { font-family: var(--font-mono); color: var(--accent-300); }
+  .setup-bar { display: block; height: 3px; margin-top: 4px; background: var(--rule); }
+  .setup-fill { display: block; height: 100%; width: 48%; background: var(--accent); }
 
   /* ── shortcuts ── */
   .keys {
