@@ -16,7 +16,7 @@
     },
     {
       title: "Nothing else to install",
-      body: "The LaTeX engine is part of the app. You don't need TeX Live.",
+      body: "The LaTeX engine, Tectonic, is built into the app. You don't need TeX Live.",
     },
     {
       title: "Outline",
@@ -49,7 +49,7 @@
   <title>ScribeX — a LaTeX editor for Mac</title>
   <meta
     name="description"
-    content="A LaTeX editor for Mac. See the PDF as you type. Works offline, with nothing else to install."
+    content="A native LaTeX editor for Mac, written in Swift. See the PDF as you type. Works offline, with nothing else to install."
   />
   <meta property="og:title" content="ScribeX — a LaTeX editor for Mac" />
   <meta property="og:description" content="Write LaTeX and see the PDF as you type." />
@@ -74,12 +74,13 @@
 <main id="main">
   <section class="hero">
     <div class="wrap">
-      <p class="rubric eyebrow">A LaTeX editor for Mac</p>
+      <p class="rubric eyebrow">A native LaTeX editor for Mac</p>
       <h1>Write LaTeX.<br />See the <em>PDF</em>.</h1>
       <hr class="gilt-rule" />
       <p class="lede">
         ScribeX shows your document next to its source and updates it as you
-        type. It works offline, and there's nothing else to install.
+        type. It's a native Mac app, written in Swift, with a typesetting
+        engine in Rust. It works offline, and there's nothing else to install.
       </p>
       <div class="cta">
         <a class="btn btn-primary" href={DOWNLOAD}>Download for macOS</a>
@@ -223,7 +224,7 @@
       </p>
       <div class="cta">
         <a class="btn btn-primary" href={DOWNLOAD}>Download for macOS</a>
-        <a class="btn" href="{REPO}#running">Build from source</a>
+        <a class="btn" href="{REPO}#building">Build from source</a>
       </div>
       <p class="req">{REQUIREMENTS}</p>
     </div>
@@ -234,10 +235,11 @@
   <div class="wrap footer-inner">
     <Logo small />
     <p>
-      Made with <a href="https://tectonic-typesetting.github.io/">Tectonic</a>,
-      <a href="https://codemirror.net/">CodeMirror</a>,
-      <a href="https://mozilla.github.io/pdf.js/">PDF.js</a> and
-      <a href="https://tauri.app/">Tauri</a>.
+      Built in <a href="https://www.swift.org/">Swift</a> and
+      <a href="https://www.rust-lang.org/">Rust</a>, with
+      <a href="https://tectonic-typesetting.github.io/">Tectonic</a>,
+      <a href="https://github.com/krzyzanowskim/STTextView">STTextView</a> and
+      <a href="https://developer.apple.com/documentation/pdfkit">PDFKit</a>.
     </p>
     <p class="copy">© 2026 Kunal Singh · <a href={REPO}>GitHub</a></p>
   </div>

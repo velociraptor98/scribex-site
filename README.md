@@ -25,10 +25,13 @@ use classes rather than `style` attributes, and self-host any new asset.
 
 ## Shared with the app
 
-- `src/lib/styles/theme.css`: tokens copied from `scribex/src/theme.css`.
-- `static/fonts/`: the app's self-hosted Cormorant Garamond and Lora (SIL OFL).
-- `static/favicon.svg`, `static/app-icon.svg`: the app's icons.
-- `src/lib/commands.ts`: the app's ⌘K matcher, copied verbatim so the demo
-  behaves like the product. Re-copy it when the app's version changes.
+- `src/lib/styles/theme.css`: the same tokens as the app's
+  `macos/ScribeXKit/Sources/ScribeXUI/Theme.swift`.
+- `static/fonts/`: the app's Cormorant Garamond and Lora (SIL OFL).
+- `static/favicon.svg`, `static/app-icon.svg`: the app's icons
+  (`macos/AppIcon.svg`).
+- `src/lib/commands.ts`: the ⌘K matcher, so the demo behaves like the product.
+  It is the TypeScript twin of the app's
+  `macos/ScribeXKit/Sources/ScribeXCore/Snippets.swift`; change both together.
 
 Links, the download URL and the system requirements are in `src/lib/site.ts`.
