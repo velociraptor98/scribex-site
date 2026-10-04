@@ -86,7 +86,7 @@
         <a class="btn btn-primary" href={DOWNLOAD}>Download for macOS</a>
         <a class="btn" href={REPO}>View on GitHub</a>
       </div>
-      <p class="req">{REQUIREMENTS}</p>
+      <p class="req">{REQUIREMENTS} · <a href="#first-launch">Opening it the first time</a></p>
 
       <div class="shot">
         <AppWindow />
@@ -227,6 +227,23 @@
         <a class="btn" href="{REPO}#building">Build from source</a>
       </div>
       <p class="req">{REQUIREMENTS}</p>
+
+      <div class="first-launch" id="first-launch">
+        <h3>Opening it the first time</h3>
+        <p>
+          ScribeX isn't notarized by Apple yet, so the first time you open it
+          macOS says it “could not verify ScribeX is free of malware”.
+        </p>
+        <ol>
+          <li>Drag ScribeX to Applications and open it. Click <strong>Done</strong>.</li>
+          <li>Open <strong>System Settings → Privacy &amp; Security</strong>.</li>
+          <li>Next to “ScribeX was blocked”, click <strong>Open Anyway</strong>, then confirm.</li>
+        </ol>
+        <p>
+          You only do this once. Or, in Terminal:
+          <code>xattr -dr com.apple.quarantine /Applications/ScribeX.app</code>
+        </p>
+      </div>
     </div>
   </section>
 </main>
@@ -416,6 +433,33 @@
   .app-icon { width: 148px; height: 148px; margin-bottom: 28px; filter: drop-shadow(0 18px 40px rgba(0, 0, 0, 0.55)); }
   .download .lede { margin-left: auto; margin-right: auto; }
   .download .cta { justify-content: center; }
+  .req a { color: var(--text-55); }
+  .req a:hover { color: var(--accent-300); }
+  .first-launch {
+    margin-top: 48px;
+    max-width: 560px;
+    padding: 24px 28px;
+    text-align: left;
+    border: 1px solid var(--rule);
+    background: var(--ink-raised);
+    scroll-margin-top: 96px;
+  }
+  .first-launch h3 { margin: 0 0 8px; font: 600 20px/1.2 var(--font-heading); }
+  .first-launch p, .first-launch li { font-size: 15px; color: var(--text-55); }
+  .first-launch p { margin: 0; }
+  .first-launch ol { margin: 14px 0; padding-left: 22px; }
+  .first-launch li { margin: 4px 0; }
+  .first-launch strong { font-weight: 500; color: var(--text); }
+  .first-launch code {
+    display: block;
+    margin-top: 8px;
+    padding: 8px 12px;
+    font: 13px var(--font-mono);
+    color: var(--accent-300);
+    background: var(--ink-deep);
+    overflow-x: auto;
+    user-select: all;
+  }
 
   /* ── footer ── */
   .footer { border-top: 1px solid var(--rule); background: var(--ink-deep); }
