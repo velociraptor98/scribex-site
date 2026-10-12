@@ -23,30 +23,23 @@
 
 <div class="demo">
   <div class="palette">
-    <label class="field">
-      <span class="key-glyph">⌘K</span>
-      <input
-        bind:value={query}
-        oninput={() => (active = 0)}
-        {onkeydown}
-        placeholder="put a 3 by 4 table here"
-        spellcheck="false"
-        autocomplete="off"
-        aria-label="Describe what you want to insert"
-      />
-      <span class="mode">Plain English</span>
-    </label>
+    <input
+      bind:value={query}
+      oninput={() => (active = 0)}
+      {onkeydown}
+      placeholder="Describe what to insert, or name a command"
+      spellcheck="false"
+      autocomplete="off"
+      aria-label="Describe what you want to insert"
+    />
 
     <div class="rows" role="listbox" aria-label="Suggestions">
       {#if rows.length === 0}
         <p class="none">Nothing matches. Try naming what you want — “a bulleted list”, “aligned equations”.</p>
       {/if}
       {#each rows as row, i (row.id)}
-        {#if i === 0}<div class="group">Best match</div>{/if}
-        {#if i === 1}<div class="group also">Also</div>{/if}
         <button
           class="item"
-          class:is-best={i === 0}
           role="option"
           aria-selected={i === active}
           data-active={i === active}
@@ -57,12 +50,10 @@
             <span class="title">{row.title}</span>
             {#if row.preview}<span class="preview">{row.preview}</span>{/if}
           </span>
-          {#if i === 0}<span class="enter">↵</span>{:else if row.hint}<span class="hint">{row.hint}</span>{/if}
+          {#if row.hint}<span class="hint">{row.hint}</span>{/if}
         </button>
       {/each}
     </div>
-
-    <div class="foot">↑↓ to choose · ↵ to insert</div>
   </div>
 
   <div class="side">
@@ -85,92 +76,71 @@
     align-items: start;
   }
 
+  /* The sheet ⌘K opens over the document window. */
   .palette {
-    background: var(--ink-panel);
-    border: 1px solid var(--accent-edge);
-    border-radius: 6px;
+    background: var(--ink);
+    border: 1px solid var(--rule-strong);
+    border-radius: 14px;
     box-shadow: var(--shadow-lg);
     overflow: hidden;
   }
-  .field {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    padding: 18px 22px;
-    border-bottom: 1px solid rgba(236, 231, 223, 0.14);
-    cursor: text;
-  }
-  .key-glyph { font: 400 13px var(--font-mono); color: var(--accent); }
   input {
-    flex: 1;
-    min-width: 0;
+    display: block;
+    width: 100%;
+    padding: 20px;
     font: 400 18px var(--font-body);
     color: var(--text);
     background: none;
     border: 0;
+    border-bottom: 1px solid var(--rule);
     caret-color: var(--accent);
   }
-  input::placeholder { color: var(--text-24); }
+  input::placeholder { color: var(--text-38); }
   input:focus-visible { outline: none; }
-  .field:focus-within { background: rgba(236, 231, 223, 0.02); }
-  .mode {
-    font: 400 10.5px var(--font-body);
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: rgba(236, 231, 223, 0.34);
-    flex: none;
-  }
 
-  .rows { padding: 12px 0 6px; min-height: 250px; }
-  .group {
-    font: 400 10px var(--font-body);
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: rgba(236, 231, 223, 0.34);
-    padding: 6px 22px;
-  }
-  .also { padding-top: 14px; border-top: 1px solid var(--rule-soft); margin-top: 8px; }
+  .rows { padding: 8px 10px; min-height: 262px; }
   .item {
+    position: relative;
     display: flex;
     align-items: center;
     gap: 16px;
     width: 100%;
     text-align: left;
-    padding: 10px 22px;
+    padding: 8px 10px;
     background: none;
     border: 0;
-    border-left: 2px solid transparent;
+    border-radius: 9px;
     cursor: pointer;
     font: inherit;
   }
-  .item[data-active="true"] { background: var(--accent-wash); border-left-color: var(--accent); }
+  /* A hairline between rows, which the selection covers on both its sides. */
+  .item + .item::before {
+    content: "";
+    position: absolute;
+    inset: 0 10px auto;
+    height: 1px;
+    background: var(--rule-soft);
+  }
+  .item[data-active="true"]::before,
+  .item[data-active="true"] + .item::before { display: none; }
+  .item[data-active="true"] { background: rgba(236, 231, 223, 0.13); }
   .main { flex: 1; min-width: 0; }
-  .title { display: block; font: 400 14.5px var(--font-body); color: rgba(236, 231, 223, 0.82); }
-  .is-best .title { font-size: 15px; color: var(--text); }
+  .title {
+    display: block;
+    font: 400 13.5px -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+    color: var(--text);
+  }
   .preview {
     display: block;
     font: 400 11.5px var(--font-mono);
-    color: rgba(236, 231, 223, 0.45);
+    color: var(--text-55);
     margin-top: 3px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
-  .enter {
-    font: 400 11px var(--font-mono);
-    padding: 3px 7px;
-    border: 1px solid rgba(194, 141, 65, 0.5);
-    border-radius: 3px;
-    color: var(--accent);
-  }
-  .hint { font: 400 11px var(--font-mono); color: rgba(236, 231, 223, 0.35); }
-  .none { margin: 0; padding: 8px 22px; font: italic 400 13px/1.7 var(--font-body); color: var(--text-38); }
-  .foot {
-    padding: 11px 22px;
-    border-top: 1px solid rgba(236, 231, 223, 0.1);
-    font: 400 11.5px var(--font-body);
-    color: var(--text-38);
-  }
+  .hint { font: 400 11px var(--font-mono); color: var(--text-38); }
+  .none { margin: 0; padding: 12px 10px; font: italic 400 13px/1.7 var(--font-body); color: var(--text-55); }
 
   .side { min-width: 0; }
   .out {
@@ -201,6 +171,5 @@
 
   @media (max-width: 860px) {
     .demo { grid-template-columns: 1fr; }
-    .mode { display: none; }
   }
 </style>

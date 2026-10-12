@@ -26,12 +26,19 @@ use classes rather than `style` attributes, and self-host any new asset.
 ## Shared with the app
 
 - `src/lib/styles/theme.css`: the same tokens as the app's
-  `macos/ScribeXKit/Sources/ScribeXUI/Theme.swift`.
+  `macos/ScribeXKit/Sources/ScribeXUI/App/Style.swift`.
 - `static/fonts/`: the app's Cormorant Garamond and Lora (SIL OFL).
 - `static/favicon.svg`, `static/app-icon.svg`: the app's icons
   (`macos/AppIcon.svg`).
 - `src/lib/commands.ts`: the ⌘K matcher, so the demo behaves like the product.
   It is the TypeScript twin of the app's
-  `macos/ScribeXKit/Sources/ScribeXCore/Snippets.swift`; change both together.
+  `macos/ScribeXKit/Sources/ScribeXCore/Content/Snippets.swift` and the
+  `snippets.json` beside it; change them together.
+- `src/lib/components/`: the document window, the palette and the issues
+  drawer are HTML stand-ins for the app's own views in
+  `macos/ScribeXKit/Sources/ScribeXUI/` (`Editor/DocumentView.swift`,
+  `App/Palette.swift`, `Editor/Issues.swift`), not screenshots. Redraw them
+  when those views change.
 
-Links, the download URL and the system requirements are in `src/lib/site.ts`.
+Links, the version, the download URL and the system requirements are in
+`src/lib/site.ts`; set `VERSION` to the release's tag.

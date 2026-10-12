@@ -3,7 +3,7 @@
   import AppWindow from "$lib/components/AppWindow.svelte";
   import PaletteDemo from "$lib/components/PaletteDemo.svelte";
   import MarksDemo from "$lib/components/MarksDemo.svelte";
-  import { DOWNLOAD, REPO, REQUIREMENTS } from "$lib/site";
+  import { DOWNLOAD, REPO, REQUIREMENTS, VERSION } from "$lib/site";
 
   const FEATURES = [
     {
@@ -11,8 +11,8 @@
       body: "The PDF updates a moment after you stop typing.",
     },
     {
-      title: "Autosave",
-      body: "Your file is saved every 10 seconds. The title bar shows when it happens.",
+      title: "Auto Save and Versions",
+      body: "macOS saves as you work and keeps earlier versions, so you can go back to one.",
     },
     {
       title: "Nothing else to install",
@@ -42,6 +42,9 @@
     ["⌘N", "New document"],
     ["⌘B", "Bold"],
     ["⌘I", "Emphasis"],
+    ["⇧⌘M", "Show or hide the issues"],
+    ["⌥⌘P", "Show or hide the preview"],
+    ["⌘0", "Fit the preview to width"],
   ];
 </script>
 
@@ -173,11 +176,10 @@
         <li>
           <span class="step-n tnum">2</span>
           <div>
-            <h3>Offline by default</h3>
+            <h3>Offline from then on</h3>
             <p>
-              <span class="lamp"><span class="lamp-dot"></span>Offline</span>
-              in the title bar means ScribeX won't use the internet. Click it to
-              allow downloads.
+              Builds never use the internet. ScribeX only goes online when you
+              ask it to.
             </p>
           </div>
         </li>
@@ -186,12 +188,14 @@
           <div>
             <h3>More packages when you need them</h3>
             <p>
-              If a document uses a package you don't have yet, ScribeX tells you
-              which one and can download it. The title bar shows it coming in.
+              If a document uses a package you don't have yet, ScribeX marks
+              the line that asks for it. Click <strong>Fetch</strong> to
+              download it once; the toolbar shows it coming in.
             </p>
-            <div class="banner">
-              <span><code>tikz.sty</code> is not in the offline cache.</span>
-              <span class="btn btn-sm btn-primary">Fetch it</span>
+            <div class="note" aria-hidden="true">
+              <svg class="note-icon" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6.2" /><path d="M8 4.8v6M5.6 8.6 8 11l2.4-2.4" /></svg>
+              <span><code>tikz.sty</code> isn’t downloaded</span>
+              <span class="note-btn">Fetch</span>
             </div>
           </div>
         </li>
@@ -226,7 +230,7 @@
         <a class="btn btn-primary" href={DOWNLOAD}>Download for macOS</a>
         <a class="btn" href="{REPO}#building">Build from source</a>
       </div>
-      <p class="req">{REQUIREMENTS}</p>
+      <p class="req">Version {VERSION} · {REQUIREMENTS}</p>
 
       <div class="first-launch" id="first-launch">
         <h3>Opening it the first time</h3>
@@ -368,31 +372,36 @@
   .steps h3 { margin: 0 0 6px; font: 600 20px/1.2 var(--font-heading); }
   .steps p { margin: 0; font-size: 15px; color: var(--text-55); }
   .steps strong { font-weight: 500; color: var(--text); }
-  .lamp { color: var(--text-70); white-space: nowrap; }
-  .lamp-dot {
-    display: inline-block;
-    width: 5px;
-    height: 5px;
-    margin-right: 6px;
-    border-radius: 50%;
-    background: var(--accent);
-    vertical-align: 0.2em;
-  }
-  .banner {
-    display: flex;
-    flex-wrap: wrap;
+  /* The note the editor pins to the line that asks for a missing package. */
+  .note {
+    display: inline-flex;
     align-items: center;
-    gap: 12px;
+    gap: 8px;
     margin-top: 16px;
-    padding: 10px 16px;
-    background: var(--accent-wash);
-    border: 1px solid var(--accent-edge);
-    border-radius: var(--radius-md);
-    font-size: 13.5px;
-    color: var(--text-70);
+    padding: 4px 5px 4px 11px;
+    background: rgba(194, 141, 65, 0.14);
+    border-radius: 999px;
+    font-size: 12.5px;
+    color: var(--text);
   }
-  .banner code { font-family: var(--font-mono); color: var(--accent-300); }
-  .banner .btn { cursor: default; }
+  .note code { font: 12px var(--font-mono); }
+  .note-icon {
+    width: 15px;
+    height: 15px;
+    flex: none;
+    fill: none;
+    stroke: var(--accent);
+    stroke-width: 1.3;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .note-btn {
+    padding: 1px 10px;
+    border-radius: 999px;
+    background: rgba(236, 231, 223, 0.12);
+    font: 500 11px -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+    line-height: 18px;
+  }
   .setup {
     display: flex;
     flex-direction: column;
@@ -424,7 +433,7 @@
     padding: 14px 0;
     border-top: 1px solid var(--rule-soft);
   }
-  .key-row dt { width: 58px; flex: none; }
+  .key-row dt { width: 62px; flex: none; }
   .key-row dd { margin: 0; font-size: 15px; color: var(--text-70); }
 
   /* ── download ── */
